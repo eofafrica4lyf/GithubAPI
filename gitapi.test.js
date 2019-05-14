@@ -1,13 +1,21 @@
-const gitapi = require('./gitapi');
+const filed = require('./filed');
+// const axios = require('axios');
+jest.mock("./gitapi");
+// import gitapi from './gitapi';
 
-test('test for empty parameter',()=>{
-    expect(gitapi()).toBe('Invalid parameter was passed');
+
+test('test to ensure that a valid string/username was passed and a response was gotten', ()=>{
+    // console.log(gitapi());
+    return filed().then(data =>{
+        expect(data).toBe('GithubAPI');
+    });
+    // await expect(gitapi()).toContain('GithubAPI');
 });
 
-test('test to ensure that the parameter passed is a string',()=>{
-    expect(gitapi([])).toBe('Invalid parameter was passed');
-});
+test('test to ensure that a valid string/username was passed and a response was gotten', ()=>{
+    // console.log(gitapi());
+    return filed().catch(e => 
+        expect(e).toMatch('error'));
 
-test('test to ensure that a valid string/username was passed and a response was gotten',()=>{
-    expect(gitapi('eofafrica4lyf')).toContain('full_name');
-})
+    // await expect(gitapi()).toContain('GithubAPI');
+});
